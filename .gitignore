@@ -4,8 +4,8 @@
 .vscode
 .vscode/*
 
-__pyache__
-__pyache__/*
+__pycache__
+__pycache__/*
 
 .idea
 .idea/*
