@@ -1,6 +1,6 @@
-from .Run import Game
+from .GameInit import GameInit
 
 
 __all__ = [
-    'Game',
+    'GameInit',
 ]

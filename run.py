@@ -1,6 +1,6 @@
-from game import Run
+from game import GameInit
 
 
 if __name__ == "__main__":
-    g = Run()
+    g = GameInit()
     g.run()

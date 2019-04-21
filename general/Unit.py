@@ -1,29 +1,27 @@
 from .Subject import Subject
 import abc
 import os
+from game import settings
 
 
-class Unit(Subject, abc.ABC):
+class Unit(Subject):
 
     direction = 0
+    max_directions = 4
 
     def __getattribute__(self, attr):
         method = object.__getattribute__(self, attr)
-        os.system('cls')
+        # os.system('cls')
         return method
 
-    @abc.abstractmethod
-    def interaction(self, ob):
-        pass
-
     def step_up(self, val):
-        pass
+        self.direction = settings.DIRECTIONS['up']
 
     def step_down(self, val):
-        pass
+        self.direction = settings.DIRECTIONS['down']
 
     def step_left(self, val):
-        pass
+        self.direction = settings.DIRECTIONS['left']
 
     def step_right(self, val):
-        pass
+        self.direction = settings.DIRECTIONS['right']
