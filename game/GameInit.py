@@ -32,7 +32,8 @@ class GameInit:
         os.system('cls')
         print(f"Game was started!!!\n\n{self.help_message}\n")
         print(f"Lives: {GlobalStat.get_lives()}")
-        print(f"Score: {GlobalStat.get_score()}\n\n")
+        print(f"Score: {GlobalStat.get_score()}")
+        print(f"Points left: {GlobalStat.get_point_count()}\n\n")
 
         Map.set_to_map_data(
             x=self.pacman.coord_x, y=self.pacman.coord_y,

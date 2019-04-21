@@ -5,7 +5,7 @@ class GlobalStat:
 
     _score = 0
     _lives = settings.PACMAN_LIVES
-    _point_list = list()
+    _point_count = settings.POINT_COUNT
 
     @classmethod
     def get_score(cls):
@@ -22,3 +22,8 @@ class GlobalStat:
     @classmethod
     def update_lives(cls, v):
         cls._lives -= v
+        cls._point_count -= 1
+
+    @classmethod
+    def get_point_count(cls):
+        return cls._point_count
