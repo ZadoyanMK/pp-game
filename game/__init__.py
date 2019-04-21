@@ -1,4 +1,4 @@
-from .Game import Game
+from .Run import Game
 
 
 __all__ = [
