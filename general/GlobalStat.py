@@ -14,6 +14,7 @@ class GlobalStat:
     @classmethod
     def update_score(cls, v):
         cls._score += v
+        cls._point_count -= 1
 
     @classmethod
     def get_lives(cls):
@@ -22,7 +23,6 @@ class GlobalStat:
     @classmethod
     def update_lives(cls, v):
         cls._lives -= v
-        cls._point_count -= 1
 
     @classmethod
     def get_point_count(cls):

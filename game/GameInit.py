@@ -41,7 +41,7 @@ class GameInit:
 
         Map.print_map()
 
-    def step(self, v):
+    def _step(self, v):
         if v.upper() == 'W':
             self.pacman.step_up(1)
         if v.upper() == 'S':
@@ -52,14 +52,19 @@ class GameInit:
             self.pacman.step_left(1)
         self.regenerate()
 
+    def _end_game_message(self):
+        print(f'\n\nYour score: {GlobalStat.get_score()}\n\n')
+
     def run(self):
-        while True:
+        while GlobalStat.get_point_count() > 0 and GlobalStat.get_lives() > 0:
             v = None
 
             try:
                 v = readchar.readkey()
             except KeyboardInterrupt:
-                print("Goodbye")
+                self._end_game_message()
                 return
 
-            self.step(v)
+            self._step(v)
+
+        self._end_game_message()
