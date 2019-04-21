@@ -1,0 +1,2 @@
+class GlobalStat:
+    pass
