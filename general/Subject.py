@@ -8,5 +8,5 @@ class Subject(metaclass=abc.ABCMeta):
     value = 1
 
     @abc.abstractmethod
-    def interaction(self, ob):
+    def interaction(self, ob=None, x=None, y=None):
         pass
