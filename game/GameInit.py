@@ -7,7 +7,7 @@ import readchar
 
 class GameInit:
 
-    help_message = "Instructions pacman -> () \npacman controls: wsad\n\n" \
+    help_message = "Instructions:\npacman -> () \npacman controls: wsad\n\n" \
         "dacman -> []\ndacman controls 8546\n"
     pacman = None
     dacman = None
@@ -39,7 +39,7 @@ class GameInit:
 
     def regenerate(self):
         os.system('cls')
-        print(f"Game was started!!!\n\n{self.help_message}\n")
+        print(f"!!!Pacman vs Dacman!!!\n{self.help_message}")
         print(f"Pacman lives: {GlobalStat.get_lives()['pacman']}")
         print(f"Pacman score: {GlobalStat.get_score()['pacman']}\n")
 
