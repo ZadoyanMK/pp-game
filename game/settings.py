@@ -8,21 +8,27 @@ DIRECTIONS = {
 FIELD_SIZE_X = 10
 FIELD_SIZE_Y = 10
 
-EMPTY_FIELD = ".."
+EMPTY_FIELD = "   "
 
-BLOCK_FIELD = "##"
+BLOCK_FIELD = "###"
 BLOCK_COUNT = 5
 
-POINT_FIELD = "<>"
+POINT_FIELD = "<{}>"
 POINT_COUNT = 10
 POINT_MAX_VALUE = 3
 POINT_MIN_VALUE = 1
 
+MINE_FIELD = " , "
+MINE_COUNT = 4
+MINE_MAX_VALUE = 3
+MINE_MIN_VALUE = 1
+
+
 PACMAN_DIRECTIONS = {
-    0: ">)",
-    1: "(<",
-    2: "\\/",
-    3: "/\\"
+    0: ">*)",
+    1: "(*<",
+    2: "\\_/",
+    3: "/^\\"
 }
 
 PACMAN_LIVES = 3

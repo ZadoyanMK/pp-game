@@ -1,5 +1,5 @@
 from general import Map, GlobalStat
-from units import Pacman, Block, Point
+from units import Pacman, Block, Point, Mine
 import os
 from game import settings
 import readchar
@@ -16,17 +16,23 @@ class GameInit:
         self.regenerate()
 
     def _generate_field_data(self):
-        for _ in range(settings.POINT_COUNT):
-            c = Point()
-            Map.set_to_map_data(
-                x=c.coord_x, y=c.coord_y,
-                val=settings.POINT_FIELD, ob=c)
-
         for _ in range(settings.BLOCK_COUNT):
             c = Block()
             Map.set_to_map_data(
                 x=c.coord_x, y=c.coord_y,
                 val=settings.BLOCK_FIELD, ob=c)
+
+        for _ in range(settings.POINT_COUNT):
+            c = Point()
+            Map.set_to_map_data(
+                x=c.coord_x, y=c.coord_y,
+                val=settings.POINT_FIELD.format(c.value), ob=c)
+
+        for _ in range(settings.MINE_COUNT):
+            c = Mine()
+            Map.set_to_map_data(
+                x=c.coord_x, y=c.coord_y,
+                val=settings.MINE_FIELD.format(c.value), ob=c)
 
     def regenerate(self):
         os.system('cls')
@@ -52,13 +58,11 @@ class GameInit:
             self.pacman.step_left(1)
         self.regenerate()
 
-    def _end_game_message(self):
+    def _end_game_message(self, key=None):
         print(f'\n\nYour score: {GlobalStat.get_score()}\n\n')
 
-    def run(self):
-        while GlobalStat.get_point_count() > 0 and GlobalStat.get_lives() > 0:
-            v = None
-
+    def _run_pacman(self, key=None):
+        while GlobalStat.get_lives() > 0 and GlobalStat.get_point_count() > 0:
             try:
                 v = readchar.readkey()
             except KeyboardInterrupt:
@@ -68,3 +72,7 @@ class GameInit:
             self._step(v)
 
         self._end_game_message()
+
+    def run(self):
+        self._run_pacman()
+

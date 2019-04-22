@@ -49,5 +49,5 @@ class Map:
         cls._check_map()
         for i in range(cls._size_x):
             for j in range(cls._size_x):
-                print(cls._display_map[i][j], end=" ")
+                print(cls._display_map[i][j], end="")
             print()
