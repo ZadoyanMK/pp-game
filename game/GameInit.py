@@ -62,15 +62,14 @@ class GameInit:
         self.pacman.move(v)
         self.dacman.move(v)
 
-        print(v)
         self.regenerate()
 
     def _end_game_message(self, key=None):
-        print(f'\n\nYour score: {GlobalStat.get_score()}\n\n')
+        print(f'\n\nScore:\n Pacman: {GlobalStat.get_score()["pacman"]}\n Dacman: {GlobalStat.get_score()["dacman"]}\n')
 
     def _is_end_game(self):
-        return GlobalStat.get_lives()['pacman'] == 0 \
-            or GlobalStat.get_lives()['dacman'] == 0 \
+        return GlobalStat.get_lives()['pacman'] <= 0 \
+            or GlobalStat.get_lives()['dacman'] <= 0 \
             or GlobalStat.get_point_count() == 0
 
     def _run_pacman(self, key=None):

@@ -5,6 +5,9 @@ from game import settings
 
 class Unit(Subject):
 
+    directions_str = ""
+    step = 1
+
     def interaction(self, ob=None, x=None, y=None):
         local_x = x if x else self.coord_x
         local_y = y if y else self.coord_y
@@ -12,10 +15,24 @@ class Unit(Subject):
         m = Map.get_game_map()
         if not m[local_x][local_y]:
             return True
+        
+        if isinstance(ob, self.__class__):
+            return False
 
         return m[local_x][local_y].interaction(ob=self)
 
     direction = 0
+
+    def move(self, v):
+        if v.upper() == self.directions_str[0]:
+            self.step_up(self.step)
+        if v.upper() == self.directions_str[1]:
+            self.step_down(self.step)
+        if v.upper() == self.directions_str[2]:
+            self.step_right(self.step)
+        if v.upper() == self.directions_str[3]:
+            self.step_left(self.step)
+
 
     def _check_valid(self, x=None, y=None):
         if x:
