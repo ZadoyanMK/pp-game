@@ -7,7 +7,8 @@ import readchar
 
 class GameInit:
 
-    help_message = "Instructions"
+    help_message = "Instructions pacman -> () \npacman controls: wsad\n\n" \
+        "dacman -> []\ndacman controls 8546\n"
     pacman = None
     dacman = None
 
