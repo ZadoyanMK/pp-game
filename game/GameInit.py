@@ -24,7 +24,7 @@ class GameInit:
             Map.set_to_map_data(
                 x=c.coord_x, y=c.coord_y,
                 val=settings.BLOCK_FIELD, ob=c)
-
+        
         for _ in range(settings.POINT_COUNT):
             c = Point()
             Map.set_to_map_data(
@@ -35,7 +35,7 @@ class GameInit:
             c = Mine()
             Map.set_to_map_data(
                 x=c.coord_x, y=c.coord_y,
-                val=settings.MINE_FIELD.format(c.value), ob=c)
+                val=settings.MINE_FIELD.format(c.value), ob=c)            
 
     def regenerate(self):
         os.system('cls')

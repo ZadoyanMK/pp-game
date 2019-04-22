@@ -1,6 +1,7 @@
 from .Subject import Subject
 from .Map import Map
 from game import settings
+from .GlobalStat import GlobalStat
 
 
 class Unit(Subject):
@@ -9,13 +10,13 @@ class Unit(Subject):
     step = 1
 
     def interaction(self, ob=None, x=None, y=None):
-        local_x = x if x else self.coord_x
-        local_y = y if y else self.coord_y
+        local_x = x if x is not None else self.coord_x
+        local_y = y if y is not None else self.coord_y
 
         m = Map.get_game_map()
+
         if not m[local_x][local_y]:
             return True
-        
         if isinstance(ob, self.__class__):
             return False
 
@@ -35,41 +36,33 @@ class Unit(Subject):
 
 
     def _check_valid(self, x=None, y=None):
-        if x:
-            return x in range(settings.FIELD_SIZE_X) and self.interaction(x=x)
-        if y:
-            return y in range(settings.FIELD_SIZE_Y) and self.interaction(y=y)
-
-        return True
-
-    def step_up(self, val):
-        self.direction = settings.DIRECTIONS['up']
         Map.set_to_map_data(
             x=self.coord_x, y=self.coord_y,
             val=settings.EMPTY_FIELD)
+
+        if x is not None:
+            return x in range(settings.FIELD_SIZE_X) and self.interaction(x=x)
+        if y is not None:
+            return y in range(settings.FIELD_SIZE_Y) and self.interaction(y=y)
+        GlobalStat.helpers.append(f"Invalid!{x}")
+        return False
+
+    def step_up(self, val):
+        self.direction = settings.DIRECTIONS['up']
         if self._check_valid(x=self.coord_x - val):
             self.coord_x -= val
 
     def step_down(self, val):
         self.direction = settings.DIRECTIONS['down']
-        Map.set_to_map_data(
-            x=self.coord_x, y=self.coord_y,
-            val=settings.EMPTY_FIELD)
         if self._check_valid(x=self.coord_x + val):
             self.coord_x += val
 
     def step_left(self, val):
         self.direction = settings.DIRECTIONS['left']
-        Map.set_to_map_data(
-            x=self.coord_x, y=self.coord_y,
-            val=settings.EMPTY_FIELD)
         if self._check_valid(y=self.coord_y - val):
             self.coord_y -= val
 
     def step_right(self, val):
         self.direction = settings.DIRECTIONS['right']
-        Map.set_to_map_data(
-            x=self.coord_x, y=self.coord_y,
-            val=settings.EMPTY_FIELD)
         if self._check_valid(y=self.coord_y + val):
             self.coord_y += val

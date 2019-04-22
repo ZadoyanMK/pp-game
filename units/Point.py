@@ -7,8 +7,6 @@ from .Pacman import Pacman
 
 class Point(FieldSubjects):
 
-    # def __init__(self, *a, **k):
-    #     super(FieldSubjects, self).__init__(*a, **k)
     def __init__(self, *a, **k):
         super().__init__(*a, **k)
 
