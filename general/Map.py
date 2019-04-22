@@ -1,4 +1,3 @@
-import numpy as np
 from game.settings import FIELD_SIZE_X, FIELD_SIZE_Y, EMPTY_FIELD
 
 
@@ -47,7 +46,9 @@ class Map:
     @classmethod
     def print_map(cls):
         cls._check_map()
+        print('-' * (cls._size_x * len(EMPTY_FIELD)))
         for i in range(cls._size_x):
             for j in range(cls._size_x):
                 print(cls._display_map[i][j], end="")
-            print()
+            print('|')
+        print('-' * (cls._size_x * len(EMPTY_FIELD)))

@@ -1,17 +1,18 @@
-from general import Unit, Map
-from units import Block, Point
+from general import Unit
 
 
 class Pacman(Unit):
 
     direction = 1
+    coord_y = 0
+    coord_x = 0
 
-    def interaction(self, ob=None, x=None, y=None):
-        local_x = x if x else self.coord_x
-        local_y = y if y else self.coord_y
-
-        m = Map.get_game_map()
-        if not m[local_x][local_y]:
-            return True
-
-        return m[local_x][local_y].interaction(ob=self)
+    def move(self, v):
+        if v.upper() == 'W':
+            self.step_up(1)
+        if v.upper() == 'S':
+            self.step_down(1)
+        if v.upper() == 'D':
+            self.step_right(1)
+        if v.upper() == 'A':
+            self.step_left(1)

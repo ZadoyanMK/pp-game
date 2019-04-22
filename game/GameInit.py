@@ -1,5 +1,5 @@
 from general import Map, GlobalStat
-from units import Pacman, Block, Point, Mine
+from units import Pacman, Block, Point, Mine, Dacman
 import os
 from game import settings
 import readchar
@@ -9,9 +9,11 @@ class GameInit:
 
     help_message = "Instructions"
     pacman = None
+    dacman = None
 
     def __init__(self):
         self.pacman = Pacman()
+        self.dacman = Dacman()
         self._generate_field_data()
         self.regenerate()
 
@@ -37,32 +39,41 @@ class GameInit:
     def regenerate(self):
         os.system('cls')
         print(f"Game was started!!!\n\n{self.help_message}\n")
-        print(f"Lives: {GlobalStat.get_lives()}")
-        print(f"Score: {GlobalStat.get_score()}")
+        print(f"Pacman lives: {GlobalStat.get_lives()['pacman']}")
+        print(f"Pacman score: {GlobalStat.get_score()['pacman']}\n")
+
+        print(f"Dacman lives: {GlobalStat.get_lives()['dacman']}")
+        print(f"Dacman score: {GlobalStat.get_score()['dacman']}\n")
+
         print(f"Points left: {GlobalStat.get_point_count()}\n\n")
 
         Map.set_to_map_data(
             x=self.pacman.coord_x, y=self.pacman.coord_y,
             val=settings.PACMAN_DIRECTIONS[self.pacman.direction], ob=self.pacman)
 
+        Map.set_to_map_data(
+            x=self.dacman.coord_x, y=self.dacman.coord_y,
+            val=settings.DACMAN_DIRECTIONS[self.dacman.direction], ob=self.dacman)
+
         Map.print_map()
 
     def _step(self, v):
-        if v.upper() == 'W':
-            self.pacman.step_up(1)
-        if v.upper() == 'S':
-            self.pacman.step_down(1)
-        if v.upper() == 'D':
-            self.pacman.step_right(1)
-        if v.upper() == 'A':
-            self.pacman.step_left(1)
+        self.pacman.move(v)
+        self.dacman.move(v)
+
+        print(v)
         self.regenerate()
 
     def _end_game_message(self, key=None):
         print(f'\n\nYour score: {GlobalStat.get_score()}\n\n')
 
+    def _is_end_game(self):
+        return GlobalStat.get_lives()['pacman'] == 0 \
+            or GlobalStat.get_lives()['dacman'] == 0 \
+            or GlobalStat.get_point_count() == 0
+
     def _run_pacman(self, key=None):
-        while GlobalStat.get_lives() > 0 and GlobalStat.get_point_count() > 0:
+        while not self._is_end_game():
             try:
                 v = readchar.readkey()
             except KeyboardInterrupt:

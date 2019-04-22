@@ -1,6 +1,7 @@
 from general import FieldSubjects, GlobalStat
 from random import randint
 from game import settings
+from .Pacman import Pacman
 
 
 class Mine(FieldSubjects):
@@ -11,5 +12,8 @@ class Mine(FieldSubjects):
         self.value = randint(settings.MINE_MIN_VALUE, settings.MINE_MAX_VALUE)
 
     def interaction(self, ob=None, x=None, y=None):
-        GlobalStat.update_lives(self.value)
+        if isinstance(ob, Pacman):
+            GlobalStat.update_pacman_lives(self.value)
+        else:
+            GlobalStat.update_dacman_lives(self.value)
         return True
