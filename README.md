@@ -13,5 +13,5 @@ virtualenv .venv && pip install -r requirements.txt && .\.venv\Scripts\python .\
 - for powershell:
 
 ```
-virtualenv .venv && pip install -r requirements.txt && .\.venv\Scripts\python .\run.py
+virtualenv .venv; pip install -r requirements.txt; .\.venv\Scripts\python .\run.py
 ```
